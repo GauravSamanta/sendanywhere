@@ -9,9 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "jotai": "^2.9.1",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.424.0",
+    "nanoid": "^5.0.7",
+    "next": "14.2.5",
+    "peerjs": "^1.5.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.5"
+    "react-dropzone": "^14.2.3",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "postcss": "^8",
