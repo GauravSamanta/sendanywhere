@@ -51,9 +51,9 @@ export default function Receiver() {
   return (
     <>
       <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg max-w-lg mx-auto mt-10">
+        <h1 className="text-2xl font-semibold text-center mb-4">Your Connection ID</h1>
         <div className="text-lg font-semibold mb-4 text-center">{peer.id}</div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
             <label htmlFor="otp" className="text-sm font-medium mb-2">
@@ -67,12 +67,30 @@ export default function Receiver() {
               placeholder="Enter OTP"
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300"
-          >
-            Receive
-          </button>
+          <div className="flex justify-center items-center gap-4 mt-5">
+            <button
+              className="text-text-blue-700 hover:text-white border border-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm py-3 px-6 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 items-center flex px-3 py-2 rounded-full shadow"
+              type="submit"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+              >
+                <path
+                  d="M8 0L8 10M8 10L5 7M8 10L11 7M1 14H15M1 14L1 12M15 14L15 12"
+                  stroke="white"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <h3 className="text-xs font-semibold leading-4 px-2">
+                Receive File
+              </h3>
+            </button>
+          </div>
         </form>
 
         <br />
