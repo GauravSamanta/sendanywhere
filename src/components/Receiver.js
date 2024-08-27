@@ -11,12 +11,12 @@ export default function Receiver() {
   useEffect(() => {
     setPeer(new Peer(nanoid(6)));
   }, []);
-  const downloadPrompt = async () => {
-    const file = await base64ToBlob(receivedData.current);
+  const downloadPrompt =  () => {
+    const file =  base64ToBlob(receivedData.current);
     const url = URL.createObjectURL(file);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "demo"; // Set the desired file name here
+    a.download = "archive"; // Set the desired file name here
     a.click();
     URL.revokeObjectURL(url);
   };
