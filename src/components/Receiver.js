@@ -54,6 +54,7 @@ export default function Receiver() {
         <h1 className="text-2xl font-semibold text-center mb-4">Your Connection ID</h1>
         <div className="text-lg font-semibold mb-4 text-center">{peer.id}</div>
 
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
             <label htmlFor="otp" className="text-sm font-medium mb-2">
@@ -91,6 +92,7 @@ export default function Receiver() {
               </h3>
             </button>
           </div>
+
         </form>
 
         <br />
