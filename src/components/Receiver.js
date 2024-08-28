@@ -26,7 +26,7 @@ export default function Receiver() {
     URL.revokeObjectURL(url);
   };
 
-  if (receiver) {
+  if (receiver && receiver.open) {
     console.log(receiver);
     receiver.on("data", function (data) {
       // console.log("Received", data);
