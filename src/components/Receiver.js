@@ -8,6 +8,7 @@ export default function Receiver() {
   const [peer, setPeer] = useState(undefined);
   const [receiver, setReceiver] = useState(undefined);
   const receivedData = useRef(null);
+  const [status, setStatus] = useState(false);
 
   useEffect(() => {
     setPeer(new Peer(nanoid(6)));
@@ -32,6 +33,7 @@ export default function Receiver() {
     return new Promise((resolve) => {
       const intervalId = setInterval(() => {
         if (receiver.open) {
+          setStatus(true);
           clearInterval(intervalId);
           resolve("Connection is now open");
         }
@@ -82,9 +84,11 @@ export default function Receiver() {
     <>
       <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg max-w-lg mx-auto mt-10">
         <h1 className="text-2xl font-semibold text-center mb-4">
-          Your Connection ID
+          Your Connection status
         </h1>
-        <div className="text-lg font-semibold mb-4 text-center">{peer.id}</div>
+        <div className="text-lg font-semibold mb-4 text-center">
+          {status ? <div>true</div> : <div>false</div>}
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">

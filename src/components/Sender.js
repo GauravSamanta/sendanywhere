@@ -16,6 +16,7 @@ export default function Sender() {
   });
   const [peer, setPeer] = useState(undefined);
   const [sender, setSender] = useState(undefined);
+  const [status, setStatus] = useState(false);
   const encoded = useRef(null);
 
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function Sender() {
     return new Promise((resolve) => {
       const intervalId = setInterval(() => {
         if (sender.open) {
+          setStatus(true);
           clearInterval(intervalId);
           resolve("Connection is now open");
         }
@@ -139,7 +141,7 @@ export default function Sender() {
   return (
     <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg max-w-lg mx-auto mt-10">
       <h3 className="text-2xl font-bold mb-6 text-center tracking-wider">
-        Your code
+        Your code <div>{status ? <div>true</div> : <div>false</div>}</div>
       </h3>
       <div className="text-2xl font-bold mb-6 text-center tracking-wider">
         {peer.id}
