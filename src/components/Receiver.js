@@ -12,6 +12,33 @@ export default function Receiver() {
   useEffect(() => {
     setPeer(new Peer(nanoid(6)));
   }, []);
+
+  useEffect(() => {
+    const handleConnection = async () => {
+      if (receiver) {
+        try {
+          const result = await promisifyConnection();
+          console.log(result); // "Connection is now open"
+          receiveData();
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+    };
+    handleConnection();
+  }, [receiver]);
+
+  const promisifyConnection = () => {
+    return new Promise((resolve) => {
+      const intervalId = setInterval(() => {
+        if (receiver.open) {
+          clearInterval(intervalId);
+          resolve("Connection is now open");
+        }
+      }, 100); // Check every 100ms
+    });
+  };
+
   const downloadPrompt = () => {
     const ok = receivedData;
     console.log(ok.current.file);
@@ -26,7 +53,7 @@ export default function Receiver() {
     URL.revokeObjectURL(url);
   };
 
-  if (receiver && receiver.open) {
+  const receiveData = () => {
     console.log(receiver);
     receiver.on("data", function (data) {
       // console.log("Received", data);
@@ -34,7 +61,7 @@ export default function Receiver() {
       console.log(receivedData);
       downloadPrompt();
     });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
