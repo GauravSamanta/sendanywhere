@@ -1,15 +1,15 @@
 import JSZip from "jszip";
 
 export const fileReader = async (files) => {
-  const toBase64 = (file) =>
-    new Promise((res, err) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file); //base64 encoding or
-      reader.onload = () => res(reader.result);
-      reader.onerror = () => {
-        alert("There was an error reading your file.");
-      };
-    });
+  // const toBase64 = (file) =>
+  //   new Promise((res, err) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file); //base64 encoding or
+  //     reader.onload = () => res(reader.result);
+  //     reader.onerror = () => {
+  //       alert("There was an error reading your file.");
+  //     };
+  //   });
 
   if (files.length > 1) {
     const zip = new JSZip();
@@ -22,12 +22,24 @@ export const fileReader = async (files) => {
       type: "application/zip",
     });
 
-    const encodedFile = await toBase64(file);
+    const finalFile = {
+      file: file,
+      type: file.type,
+      name: file.name,
+    };
 
-    return encodedFile;
+    // const encodedFile = await toBase64(file);
+
+    return finalFile;
   } else {
-    const encodedFile = await toBase64(files[0]);
+    // const encodedFile = await toBase64(files[0]);
 
-    return encodedFile;
+    const finalFile = {
+      file: files[0],
+      type: files[0].type,
+      name: files[0].name,
+    };
+    // return encodedFile;
+    return finalFile;
   }
 };

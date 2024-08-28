@@ -12,12 +12,16 @@ export default function Receiver() {
   useEffect(() => {
     setPeer(new Peer(nanoid(6)));
   }, []);
-  const downloadPrompt =  () => {
-    const file =  base64ToBlob(receivedData.current);
-    const url = URL.createObjectURL(file);
+  const downloadPrompt = () => {
+    const ok = receivedData;
+    console.log(ok.current.file);
+    const blob = new Blob([ok.current.file], { type: ok.current.type });
+    console.log(blob);
+
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "archive"; // Set the desired file name here
+    a.download = ok.current.name; // Set the desired file name here
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -50,9 +54,10 @@ export default function Receiver() {
   return (
     <>
       <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg max-w-lg mx-auto mt-10">
-        <h1 className="text-2xl font-semibold text-center mb-4">Your Connection ID</h1>
+        <h1 className="text-2xl font-semibold text-center mb-4">
+          Your Connection ID
+        </h1>
         <div className="text-lg font-semibold mb-4 text-center">{peer.id}</div>
-
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
@@ -91,7 +96,6 @@ export default function Receiver() {
               </h3>
             </button>
           </div>
-
         </form>
 
         <br />

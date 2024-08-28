@@ -22,6 +22,32 @@ export default function Sender() {
     setPeer(new Peer(nanoid(6)));
   }, []);
 
+  useEffect(() => {
+    const handleConnection = async () => {
+      if (sender) {
+        try {
+          const result = await promisifyConnection();
+          console.log(result); // "Connection is now open"
+          sendData();
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+    };
+    handleConnection();
+  }, [sender]);
+
+  const promisifyConnection = () => {
+    return new Promise((resolve) => {
+      const intervalId = setInterval(() => {
+        if (sender.open) {
+          clearInterval(intervalId);
+          resolve("Connection is now open");
+        }
+      }, 100); // Check every 100ms
+    });
+  };
+
   function TrimString(str, length) {
     if (str.length > length - 3) {
       return str.substring(0, length).trimEnd() + "...";
@@ -69,10 +95,10 @@ export default function Sender() {
   const sendData = async () => {
     encoded.current = await fileReader(acceptedFiles);
     if (sender) {
-      sender.send(encoded);
+      sender.send(encoded.current);
     }
 
-    console.log(encoded);
+    console.log(encoded.current);
   };
 
   if (!peer) {
@@ -82,7 +108,6 @@ export default function Sender() {
         <div className="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></div>
         <div className="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></div>
         <div className="h-8 w-8 bg-white rounded-full animate-bounce"></div>
-
       </div>
     );
   }
@@ -106,7 +131,6 @@ export default function Sender() {
               <p className="text-white text-lg font-semibold">Send</p>
             </div>
           </button>
-
         </div>
       </div>
     );
@@ -138,9 +162,7 @@ export default function Sender() {
     </button> */}
 
         <button
-
           className="text-text-blue-700 hover:text-white border border-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm py-3 px-6 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 items-center flex px-3 py-2 rounded-full shadow"
-
           onClick={sendData}
         >
           <svg
@@ -162,7 +184,6 @@ export default function Sender() {
           </svg>
 
           <h3 className="text-xs font-semibold leading-4 px-2">Send File</h3>
-
         </button>
       </div>
     </div>
