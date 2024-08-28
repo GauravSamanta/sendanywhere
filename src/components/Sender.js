@@ -20,7 +20,11 @@ export default function Sender() {
   const encoded = useRef(null);
 
   useEffect(() => {
-    setPeer(new Peer(nanoid(6)));
+    setPeer(
+      new Peer(nanoid(6), {
+        reliable: true,
+      })
+    );
   }, []);
 
   useEffect(() => {
@@ -90,6 +94,8 @@ export default function Sender() {
 
   if (peer) {
     peer.on("connection", (dataChannel) => {
+      console.log(dataChannel);
+      
       setSender(dataChannel);
     });
   }

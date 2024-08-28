@@ -1,4 +1,3 @@
-import { base64ToBlob } from "@/helpers/receiverReader";
 import { customAlphabet } from "nanoid";
 import Peer from "peerjs";
 import React, { useEffect, useRef, useState } from "react";
@@ -11,7 +10,11 @@ export default function Receiver() {
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
-    setPeer(new Peer(nanoid(6)));
+    setPeer(
+      new Peer(nanoid(6), {
+        reliable: true,
+      })
+    );
   }, []);
 
   useEffect(() => {
@@ -71,6 +74,7 @@ export default function Receiver() {
     const otp = document.getElementById("otp").value;
     if (peer) {
       const conn = peer.connect(otp);
+      console.log(conn);
 
       setReceiver(conn);
     }
