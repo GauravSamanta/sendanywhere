@@ -81,18 +81,16 @@ export default function Receiver() {
   };
 
   if (!peer) {
-    return <div>connecting...</div>;
+    return <div></div>;
   }
 
   return (
     <>
       <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg max-w-lg mx-auto mt-10">
         <h1 className="text-2xl font-semibold text-center mb-4">
-          Your Connection status
+          Your Connection ID
         </h1>
-        <div className="text-lg font-semibold mb-4 text-center">
-          {status ? <div>true</div> : <div>false</div>}
-        </div>
+        <div className="text-lg font-semibold mb-4 text-center">{peer.id}</div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
@@ -102,14 +100,14 @@ export default function Receiver() {
             <input
               name="otp"
               id="otp"
-              className="text-black p-2 rounded-lg border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="bg-gray-800 text-white p-2 rounded-lg border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               type="text"
               placeholder="Enter OTP"
             />
           </div>
           <div className="flex justify-center items-center gap-4 mt-5">
             <button
-              className="text-text-blue-700 hover:text-white border border-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm py-3 px-6 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 items-center flex px-3 py-2 rounded-full shadow"
+              className="text-text-blue-700 hover:text-white border border-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-blue-500 font-medium rounded-lg text-sm py-3 px-6 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 items-center flex px-3 py-2 rounded-full shadow"
               type="submit"
             >
               <svg
