@@ -65,9 +65,9 @@ export default function Sender() {
   const files = acceptedFiles.map((file) => (
     <li
       key={file.path}
-      className="flex p-3 hover:bg-gray-700 transition-colors duration-200"
+      className="flex items-center justify-between p-3 hover:bg-gray-700 transition-colors duration-200"
     >
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-4">
         <svg
           className="w-6 h-6 text-blue-400"
           xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ export default function Sender() {
           {TrimString(file.path, 35)}
         </span>
       </div>
-      <span className="flex justify-center items-center text-sm text-gray-400 mx-5">
+      <span className="bg-gray-700 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full">
         {(file.size / 1000000).toFixed(2)} MB
       </span>
     </li>
@@ -95,7 +95,7 @@ export default function Sender() {
   if (peer) {
     peer.on("connection", (dataChannel) => {
       console.log(dataChannel);
-      
+
       setSender(dataChannel);
     });
   }
@@ -126,19 +126,15 @@ export default function Sender() {
         {...getRootProps({
           className:
             "dropzone p-4 max-w-lg mx-auto mt-10 bg-gray-800 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500",
+          onClick: open,
         })}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center h-full">
           <input {...getInputProps()} className="sr-only" />
-          <button
-            onClick={open}
-            className="bg-transparent text-white rounded-full p-2 flex flex-col items-center justify-center"
-          >
-            <div className="flex flex-col items-center justify-center">
-              <Plus className="w-6 h-6 mb-1" />
-              <p className="text-white text-lg font-semibold">Send</p>
-            </div>
-          </button>
+          <div className="flex flex-col items-center justify-center">
+            <Plus className="w-6 h-6 mb-1" />
+            <p className="text-white text-lg font-semibold">Send</p>
+          </div>
         </div>
       </div>
     );
@@ -147,7 +143,7 @@ export default function Sender() {
   return (
     <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg max-w-lg mx-auto mt-10">
       <h3 className="text-2xl font-bold mb-6 text-center tracking-wider">
-        Your code <div>{status ? <div>true</div> : <div>false</div>}</div>
+        Your code
       </h3>
       <div className="text-2xl font-bold mb-6 text-center tracking-wider">
         {peer.id}
@@ -161,16 +157,18 @@ export default function Sender() {
       </div>
 
       <div className="flex justify-center items-center gap-4 mt-5">
-        {/* <button
-      onClick={() => console.log(sender)}
-      className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-      aria-label="Print sender information"
-    >
-      Print Sender
-    </button> */}
+        {/* 
+        <button
+          onClick={() => console.log(sender)}
+          className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+          aria-label="Print sender information"
+        >
+          Print Sender
+        </button> 
+        */}
 
         <button
-          className="text-text-blue-700 hover:text-white border border-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm py-3 px-6 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 items-center flex px-3 py-2 rounded-full shadow"
+          className="text-text-blue-700 hover:text-white border border-indigo-600 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-blue-500 font-medium rounded-lg text-sm py-3 px-6 text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-blue-500 items-center flex px-3 py-2 rounded-full shadow"
           onClick={sendData}
         >
           <svg
@@ -190,7 +188,6 @@ export default function Sender() {
               />
             </g>
           </svg>
-
           <h3 className="text-xs font-semibold leading-4 px-2">Send File</h3>
         </button>
       </div>
