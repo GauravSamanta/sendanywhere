@@ -16,7 +16,7 @@
     "jszip": "^3.10.1",
     "lucide-react": "^0.424.0",
     "nanoid": "^5.0.7",
-    "next": "14.2.5",
+    "next": "^14.2.17",
     "peerjs": "^1.5.4",
     "react": "^18",
     "react-dom": "^18",
